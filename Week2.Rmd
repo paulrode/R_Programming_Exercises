@@ -18,7 +18,7 @@ library("readxl")
 
 ```
 
-```{r}
+```{r, echo=FALSE}
 
   # 'directory' is a character vector of length 1 indicating 
   # the name of the pollutant for which we will calculate the mean;       
@@ -29,7 +29,7 @@ library("readxl")
   
   # Return the mean of the pollutant accross all monitors list 
   # in the `id` vector (ignoring NA values)
-  # Note: do not round the result
+  # Note: do not round the result 
   
   # set up data search path and clear the object each time function is run
 
@@ -51,26 +51,19 @@ library("readxl")
       file_data <- rbind(file_data, read_csv(paste(path, files[i], sep = "/")))
       }
     }
-return(file_data)
+  file_output <- file_data[ , c("sulfate", "nitrate")]
+  
+  return(mean(file_output, na.rm = TRUE ))
+
   }
 
-file_data <- 0
-pollutantmean("specdata", "nitrate", 1:1)
+
+pollutantmean("specdata", "nitrate", 1)
+
+# Date	sulfate	nitrate	ID
 
 
 
-id
-directory
-pollutant
-glimpse(id)
-path
-files
-i <- 0 
-length(id)
-directory <- "specdata"
-glimpse(file_data)  
-head(file_data)
-tail(file_data)
 
  
 ```

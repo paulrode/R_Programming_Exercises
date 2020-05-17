@@ -1,0 +1,77 @@
+---
+title: "Coursera R Programming Assigements "
+output: html_notebook
+---
+
+Week 2 Assigment 
+
+```{r}
+#Load Tidy enviroment 
+library("tidyverse")
+library("dplyr")
+library("stringr")
+library("lubridate")
+library("knitr")
+library("kableExtra")
+library("fpp2")
+library("readxl")
+
+```
+
+```{r}
+pollutantmean <- function(directory, pollutant, id=1:332) 
+  {
+  # 'directory' is a character vector of length 1 indicating 
+  # the name of the pollutant for which we will calculate the mean;       
+  # either "sulfate" or "nitrate".
+  
+  #'id` is an integer vector indicating the monitor ID numbers 
+  # to be used
+  
+  # Return the mean of the pollutant accross all monitors list 
+  # in the `id` vector (ignoring NA values)
+  # Note: do not round the result
+  
+  # set up data search path and clear the object each time function is run
+  file_data <- 0
+  files <- 0
+  path <- 0
+  path <- paste(getwd(), directory, sep = "/")
+  files <-  list.files(path) 
+
+  #Loop through files reading all into file_data
+  for (i in length(id)) 
+    {
+    if (i == 1) {
+      file_data <- read_csv(paste(path, files[1], sep = "/"))
+    } else {
+      file_data <- rbind(file_data, read_csv(paste(path, files[i], sep = "/")))
+      }
+    }
+  }
+
+ 
+pollutantmean("specdata", nitrate, 1:10)
+
+
+id
+glimpse(id)
+path
+files
+i <- 0 
+length(id)
+directory <- "specdata"
+glimpse(file_data)  #1461 3652
+head(file_data)
+tail(file_data)
+
+ 
+```
+
+
+
+
+
+
+
+

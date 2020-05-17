@@ -19,8 +19,7 @@ library("readxl")
 ```
 
 ```{r}
-pollutantmean <- function(directory, pollutant, id=1:332) 
-  {
+
   # 'directory' is a character vector of length 1 indicating 
   # the name of the pollutant for which we will calculate the mean;       
   # either "sulfate" or "nitrate".
@@ -33,14 +32,18 @@ pollutantmean <- function(directory, pollutant, id=1:332)
   # Note: do not round the result
   
   # set up data search path and clear the object each time function is run
+
+
+  pollutantmean <- function(directory, pollutant, id=1:332) {
   file_data <- 0
   files <- 0
   path <- 0
   path <- paste(getwd(), directory, sep = "/")
   files <-  list.files(path) 
+  
 
   #Loop through files reading all into file_data
-  for (i in length(id)) 
+  for (i in 1:length(id)) 
     {
     if (i == 1) {
       file_data <- read_csv(paste(path, files[1], sep = "/"))
@@ -48,20 +51,24 @@ pollutantmean <- function(directory, pollutant, id=1:332)
       file_data <- rbind(file_data, read_csv(paste(path, files[i], sep = "/")))
       }
     }
+return(file_data)
   }
 
- 
-pollutantmean("specdata", nitrate, 1:10)
+file_data <- 0
+pollutantmean("specdata", "nitrate", 1:1)
+
 
 
 id
+directory
+pollutant
 glimpse(id)
 path
 files
 i <- 0 
 length(id)
 directory <- "specdata"
-glimpse(file_data)  #1461 3652
+glimpse(file_data)  
 head(file_data)
 tail(file_data)
 

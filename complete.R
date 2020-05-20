@@ -10,9 +10,9 @@ library("fpp2")
 library("readxl")
 
 
-complete <- function(directory, id=1:332) 
+complete <- function(directory, id = 1:332) 
   {
-  
+ 
     file_data <- 0
     files <- 0
     path <- 0
@@ -27,8 +27,9 @@ complete <- function(directory, id=1:332)
     return(answer)
   }
 
-complete(specdata, 1:10)
+complete("specdata", 1)
 
 
-
-
+id <- 1
+id
+length(id)

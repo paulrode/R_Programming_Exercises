@@ -9,10 +9,11 @@ library("kableExtra")
 library("fpp2")
 library("readxl")
 
-
+#Define Function
 complete <- function(directory, id = 1:332) 
   {
- 
+    answer <- 0
+    nobs <- 0
     file_data <- 0
     files <- 0
     path <- 0
@@ -20,16 +21,13 @@ complete <- function(directory, id = 1:332)
     files <-  list.files(path) 
     for (i in 1:length(id)) 
     {
-        file_data <- read_csv(paste(path, files[i], sep = "/"))
+        file_data <- read_csv(paste(path, files[id[i]], sep = "/"))
         nobs[i] <- nrow(file_data[complete.cases(file_data),])
     }
     answer <- data.frame(id,nobs)
     return(answer)
   }
 
-complete("specdata", 1)
+#Run Function
+complete("specdata",c(2,4,8,10,12))
 
-
-id <- 1
-id
-length(id)

@@ -29,5 +29,5 @@ complete <- function(directory, id = 1:332)
   }
 
 #Run Function
-complete("specdata",c(2,4,8,10,12))
+complete("specdata",3)
 

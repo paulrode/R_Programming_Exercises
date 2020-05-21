@@ -31,4 +31,5 @@ corr <- function(directory, threshold = 0)
 
 #Run Function
 cr <- corr("specdata",150)
-
+head(cr)
+summary(cr)

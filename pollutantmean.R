@@ -1,3 +1,13 @@
+#Load Tidy enviroment 
+library("tidyverse")
+library("dplyr")
+library("stringr")
+library("lubridate")
+library("knitr")
+library("kableExtra")
+library("fpp2")
+library("readxl")
+
 pollutantmean <- function(directory, pollutant, id=1:332) {
   
   file_data <- 0
@@ -5,12 +15,12 @@ pollutantmean <- function(directory, pollutant, id=1:332) {
   path <- 0
   path <- paste(getwd(), directory, sep = "/")
   files <-  list.files(path) 
-  for (i in id[i]:length(id)) 
+  for (i in 1:length(id)) 
   {
     if (i == 1) {
-      file_data <- read_csv(paste(path, files[71], sep = "/"))
+      file_data <- read_csv(paste(path, files[id[i]], sep = "/"))
     } else {
-      file_data <- rbind(file_data, read_csv(paste(path, files[i], sep = "/")))
+      file_data <- rbind(file_data, read_csv(paste(path, files[id[i]], sep = "/")))
     }
   }
   file_output <- file_data

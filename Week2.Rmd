@@ -18,7 +18,7 @@ library("readxl")
 
 ```
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, warning = FALSE, message=FALSE}
 
   pollutantmean <- function(directory, pollutant, id=1:332) {
 
@@ -45,7 +45,8 @@ library("readxl")
   }
   }
 
-suppressMessages(pollutantmean("specdata", "sulfate", 1:10))
+pollutantmean("specdata", "sulfate", 1:10)
+
 
 
 

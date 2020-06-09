@@ -39,6 +39,6 @@ best <- function(state, outcome) {
 answer <- best("GA", "Heart Atack")
 best("GA", "Heart Atack")
 
-head(answer)
+head(answer) 
 
 arrange(answer, `Heart Failure`)

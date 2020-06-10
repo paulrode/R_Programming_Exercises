@@ -23,21 +23,25 @@ best <- function(state, outcome) {
   
   ## Read outcome data 
   outcome1 <- read.csv("outcome-of-care-measures.csv", colClasses = "character")
-  
-  #names(outcome1) <- c("Hospital", "City", "State", "Heart Failure", "Heart Attack", "Pneumonia")
+  outcome1 <- outcome1[ , c(2,6,7,11, 17, 23)]
+  names(outcome1) <- c("Hospital", "City", "State", "Heart Failure", "Heart Attack", "Pneumonia")
  
   ## Check that state and outcome are valid
-  any(state == outcome1$State, na.rm = TRUE)
-  any(outcome == c(outcome1$Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack, outcome1$Hospital.30.Day.Death..Mortality..Rates.from.Heart.Failure), na.rm = TRUE)  
+ 
+  if(any(state == outcome1$State, na.rm = TRUE) == "FALSE") { stop("invalid state" )}
+  
+  if(any(outcome == c("Heart Failure", "Heart Attack", "Pneumonia"), na.rm = TRUE) == "FALSE") {
+    
+  stop("invalid outcome") } 
+  
   
   ## Return hosputal name in that state with lowest 30-day death rate
-  outcome1 <- outcome1[c(outcome1$State == state), c("Hospital.Name", "City", "State", "Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack", 
-                                                "Hospital.30.Day.Death..Mortality..Rates.from.Heart.Failure", 
-                                                "Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia" )]
+  outcome1 <- outcome1[c(outcome1$State == state), c("Heart Failure", "Heart Attack", "Pneumonia")]
   outcome1
 }
-answer <- best("GA", "Heart Atack")
-best("GA", "Heart Atack")
+answer <- best("GA", "Pneumonia")
+
+answer
 
 head(answer) 
 

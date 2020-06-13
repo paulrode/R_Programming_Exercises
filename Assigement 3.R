@@ -90,12 +90,9 @@ rankall <- function(outcome, num = "best") {
   
   ## Return hospital name in that state with the given rank
     outcome1 %>% select(c(Hospital, State, outcome)) %>% na.omit() %>% group_by(State) -> outcome1
+    summarise(outcome1, (outcome1$`heart attack`[num])) -> answer
+    view(answer)
     
-    
-    
-    if(num == "best") { num <- 1} 
-    if(num == "worse") { num <- nrow(outcome1)}
-    if(num > nrow(outcome1)) {print("NA")} else {print(outcome1[num, ])}
 }
 
 

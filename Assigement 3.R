@@ -75,6 +75,9 @@ rankhospital("MD", "heart failure", "worse")
 rankhospital("MN", "heart attack", 5000)
 
 
+
+
+
 # Part 4  file: rankall.R
 
 rankall <- function(outcome, num = "best") {
@@ -89,11 +92,16 @@ rankall <- function(outcome, num = "best") {
     stop("invalid outcome") } 
   
   ## Return hospital name in that state with the given rank
-    outcome1 %>% select(c(Hospital, State, outcome)) %>% na.omit() %>% group_by(State) -> outcome1
+    outcome1 %>% select(c(Hospital, State, outcome)) %>% na.omit() -> outcome1
+    outcome1 %>% group_by(State) %>% 
+      summarise(Rank = min(outcome1[ , 2]))
+    
     summarise(outcome1, (outcome1$`heart attack`[num])) -> answer
     view(answer)
     
 }
 
+
+rankall("heart attack", 2)
 
 

@@ -95,7 +95,7 @@ rankall <- function(outcome, num = "best") {
   outcome1$State <- as.character(outcome1$State)
   outcome1$`heart attack` <- as.numeric(outcome1$`heart attack`)
   unique(outcome1$State) -> outcome2
-  outcome1 %>% group_by(State) %>% summarise( Answer = nth(`heart attack` , num)) 
+  outcome1 %>% group_by(State) %>% summarise( Name = nth(Hospital, num), Answer = nth(`heart attack` , num)) 
 
   # trying apply
   apply(rankhospital("MD", "heart failure", "worse"))

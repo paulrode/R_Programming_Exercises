@@ -21,10 +21,7 @@ hist(outcome[, 11])
 
 #Part 2 file: best.R
 #need to do this section now >>> 2 Finding the best hospital in a state
-
-
 best <- function(state, outcome) {
-  
   ## Read outcome data 
   outcome1 <- read.csv("outcome-of-care-measures.csv", na.strings = "Not Available")
   outcome1 <- outcome1[ , c(2,6,7,11, 17, 23)]
@@ -48,9 +45,7 @@ best("TX", "heart attack")
 
 
 #Part 3  file: rankhospital.R
-
 rankhospital <- function(state, outcome, num = "best") {
-  
   ## Read outcome data 
   outcome1 <- read.csv("outcome-of-care-measures.csv", na.strings = "Not Available")
   outcome1 <- outcome1[ , c(2,6,7,11, 17, 23)]
@@ -67,9 +62,7 @@ rankhospital <- function(state, outcome, num = "best") {
   if(num == "best") { num <- 1} 
   if(num == "worse") { num <- nrow(outcome1)}
   if(num > nrow(outcome1)) {print("NA")} else {print(outcome1[num, ])}
-  
 }
-
 
 rankhospital("MD", "heart failure", "worse")
 rankhospital("MN", "heart attack", 5000)
@@ -79,13 +72,10 @@ rankhospital("MN", "heart attack", 5000)
 
 
 # Part 4  file: rankall.R
-
 rankall <- function(outcome, num = "best") {
-  
   ##delete this
   outcome <- "heart attack"
   num <- 4
-  
   
   ## Read outcome data 
   outcome1 <- read.csv("outcome-of-care-measures.csv", na.strings = "Not Available")
@@ -97,16 +87,28 @@ rankall <- function(outcome, num = "best") {
     stop("invalid outcome") } 
   
   ## Return hospital name in that state with the given rank
+  outcome1 %>% select(c(Hospital, State, outcome)) -> outcome1
+  as.tibble(outcome1) -> outcome1
+  na.omit(outcome1) -> outcome1
   outcome1 %>% select(c(Hospital, State, outcome)) %>% na.omit() -> outcome1
   outcome1$Hospital <- as.character(outcome1$Hospital)
   outcome1$State <- as.character(outcome1$State)
   outcome1$`heart attack` <- as.numeric(outcome1$`heart attack`)
-  outcome1 %>% group_by(State) %>% summarise(Hpspital, Test = mean(outcome1$`heart attack`))
+  unique(outcome1$State) -> outcome2
+  outcome1 %>% group_by(State) %>% summarise( Answer = nth(`heart attack` , 1)) 
+
+ 
+
   
-  summarise(outcome1, (outcome1$`heart attack`[num])) -> answer
-  view(answer)
   
+  
+
+
+  as.data.frame(unique(outcome1$State)) 
 }
 
 
 rankall("heart attack", 2)
+
+str(outcome1)
+mpg %>% group_by(year) %>% summarise(mpgCity = mean(cty), mpgHwy = mean(hwy))

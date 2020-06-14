@@ -38,10 +38,6 @@ best <- function(state, outcome) {
   print(outcome1[1:5,])
 }
 
-best("TX", "heart attack")
-
-
-
 
 
 #Part 3  file: rankhospital.R
@@ -64,19 +60,11 @@ rankhospital <- function(state, outcome, num = "best") {
   if(num > nrow(outcome1)) {print("NA")} else {print(outcome1[num, ])}
 }
 
-rankhospital("MD", "heart failure", "worse")
-rankhospital("MN", "heart attack", 5000)
-
-
-
 
 
 # Part 4  file: rankall.R
 rankall <- function(outcome, num = "best") {
-  ##delete this
-  outcome <- "heart attack"
-  num <- 4
-  
+
   ## Read outcome data 
   outcome1 <- read.csv("outcome-of-care-measures.csv", na.strings = "Not Available")
   outcome1 <- outcome1[ , c(2,7,11, 17, 23)]
@@ -95,22 +83,11 @@ rankall <- function(outcome, num = "best") {
   outcome1$State <- as.character(outcome1$State)
   outcome1$`heart attack` <- as.numeric(outcome1$`heart attack`)
   unique(outcome1$State) -> outcome2
-  outcome1 %>% group_by(State) %>% summarise( Name = nth(Hospital, num), Answer = nth(`heart attack` , num)) 
-
-  # trying apply
-  apply(rankhospital("MD", "heart failure", "worse"))
- 
-
+  if(num == "best") { num <- 1} 
   
-  
-  
+  outcome1 %>%arrange(Hospital) %>%  group_by(State) %>% summarise( Name = nth(Hospital, num), Answer = nth(`heart attack` , num)) 
 
-
-  as.data.frame(unique(outcome1$State)) 
 }
 
 
 rankall("heart attack", 2)
-
-str(outcome1)
-mpg %>% group_by(year) %>% summarise(mpgCity = mean(cty), mpgHwy = mean(hwy))

@@ -84,7 +84,7 @@ rankall <- function(outcome, num = "best") {
   outcome1$`heart attack` <- as.numeric(outcome1$`heart attack`)
   unique(outcome1$State) -> outcome2
   if(num == "best") { num <- 1} 
-  
+
   outcome1 %>%arrange(Hospital) %>%  group_by(State) %>% summarise( Name = nth(Hospital, num), Answer = nth(`heart attack` , num)) 
 
 }

@@ -37,7 +37,7 @@ best <- function(state, outcome) {
   outcome1 %>% arrange(outcome1[ ,2], Hospital) -> outcome1
   print(outcome1[1:5,])
 }
-
+best("MD", "pneumonia")
 
 
 #Part 3  file: rankhospital.R

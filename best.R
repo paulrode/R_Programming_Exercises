@@ -16,11 +16,11 @@ best <- function(state, outcome) {
   
   ## Check that state and outcome are valid
   if(any(state == outcome1$State, na.rm = TRUE) == "FALSE") { stop("invalid state" )}
-  if(any(outcome == c("heart failure", "heart attack", "pneumonia"), na.rm = TRUE) == "FALSE") {
+  if(any(outcome == c("heart failure", "heart attack", "pneumonia"), na.rm = FALSE) == "FALSE") {
     stop("invalid outcome") } 
   
   ## Return hospital name in that state with lowest 30-day death rate
-  filter(outcome1, State == state) %>% select(c("Hospital", outcome)) %>% na.omit()-> outcome1
+  filter(outcome1, State == state) %>% select(c("Hospital", outcome)) -> outcome1
   outcome1 %>% arrange(outcome1[ ,2], Hospital) -> outcome1
   print(outcome1[1:5,])
 }
